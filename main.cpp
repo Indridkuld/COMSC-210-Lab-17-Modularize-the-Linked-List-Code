@@ -25,6 +25,7 @@ int main() {
         addFront(head, tmp_val);
     }
     output(head);
+
     // adding a node to the tail of the list
     float choice;
     cout << "Enter a value to add to the tail of the list: ";
@@ -82,7 +83,17 @@ void addFront(Node *&head, float val) {
 }
 // Add a new node to the tail of the list
 void addTail(Node *&head, float val) {
-
+    Node *n = new Node;
+    n->value = val;
+    n->next = nullptr;
+    if (!head) {  // if the list is empty, add to front
+        addFront(head, val);
+        return;
+    }
+    Node *current = head;
+    while (current->next)  // traverse to the end of the list
+        current = current->next;
+    current->next = n;  // link the new node at the end
 }
 // insertNode function to insert val after the given 1-based position. Returns true on success.
 bool insertNode(Node *&head, int entry, float val) {
