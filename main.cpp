@@ -7,7 +7,7 @@ struct Node {
     float value;
     Node *next;
 };
-
+// function prototypes 
 void output(Node *);
 void addFront(Node *&head, float val);
 void addTail(Node *&head, float val);
@@ -18,22 +18,27 @@ void deleteList(Node *&head);
 int main() {
     Node *head = nullptr;
     int count = 0;
-
+    int entry;
     // create a linked list of size SIZE with random numbers 0-99 (add to front)
     for (int i = 0; i < SIZE; i++) {
         int tmp_val = rand() % 100;
         addFront(head, tmp_val);
     }
-    
+    output(head);
+    // adding a node to the tail of the list
+    float choice;
+    cout << "Enter a value to add to the tail of the list: ";
+    cin >> choice;
+    addTail(head, choice);
     output(head);
 
     // deleting a node
     cout << "Which node to delete? " << endl;
     output(head);
-    int entry;
     cout << "Choice --> ";
     cin >> entry;
     deleteNode(head, entry); 
+    output(head);
 
     // insert a node
     Node *current = head;
@@ -45,21 +50,11 @@ int main() {
     }
     cout << "Choice --> ";
     cin >> entry;
+    insertNode(head, entry, 10000);
+    output(head);
 
-    current = head;
-    Node *prev = head;
-    for (int i = 0; i < (entry); i++)
-        if (i == 0)
-            current = current->next;
-        else {
-            current = current->next;
-            prev = prev->next;
-        }
-    //at this point, insert a node between prev and current
-    Node * newnode = new Node;
-    newnode->value = 10000;
-    newnode->next = current;
-    prev->next = newnode;
+    // deleting the linked list
+    deleteList(head);
     output(head);
 
     return 0;
@@ -89,6 +84,24 @@ void addFront(Node *&head, float val) {
 void addTail(Node *&head, float val) {
 
 }
+// insertNode function to insert val after the given 1-based position. Returns true on success.
+bool insertNode(Node *&head, int entry, float val) {
+    Node *current = head;
+    Node *prev = head;
+    for (int i = 0; i < (entry); i++)
+        if (i == 0)
+            current = current->next;
+        else {
+            current = current->next;
+            prev = prev->next;
+        }
+    //at this point, insert a node between prev and current
+    Node * newnode = new Node;
+    newnode->value = val;
+    newnode->next = current;
+    prev->next = newnode;
+    return true;    
+}
 // deleteNode function to delete node at 1-based position. Returns true if deleted.
 bool deleteNode(Node *&head, int entry) {
     Node *current = head;
@@ -106,7 +119,7 @@ bool deleteNode(Node *&head, int entry) {
         delete current;
         current = nullptr;
     }
-    output(head);
+    return true;
 }
 // delete the entire linked list and set head to nullptr
 void deleteList(Node *&head) {
