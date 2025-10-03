@@ -12,7 +12,7 @@ void output(Node *);
 void addFront(Node *&head, float val);
 void addTail(Node *&head, float val);
 bool deleteNode(Node *&head, int position); 
-bool insertAfter(Node *&head, int position, float val);
+bool insertNode(Node *&head, int position, float val);
 void deleteList(Node *&head);
 
 int main() {
@@ -28,6 +28,12 @@ int main() {
     output(head);
 
     // deleting a node
+    cout << "Which node to delete? " << endl;
+    output(head);
+    int entry;
+    cout << "Choice --> ";
+    cin >> entry;
+    deleteNode(head, entry); 
 
     // insert a node
     Node *current = head;
@@ -41,7 +47,7 @@ int main() {
     cin >> entry;
 
     current = head;
-    prev = head;
+    Node *prev = head;
     for (int i = 0; i < (entry); i++)
         if (i == 0)
             current = current->next;
@@ -59,7 +65,6 @@ int main() {
     return 0;
 }
 // function definitions
-
 void output(Node * hd) {
     if (!hd) {
         cout << "Empty list.\n";
@@ -81,15 +86,11 @@ void addFront(Node *&head, float val) {
     head = n;
 }
 // Add a new node to the tail of the list
-void addTail(Node *&head, float val) {}
-// deleteNode function to delete node at 1-based position. Returns true if deleted.
-bool deleteNode(Node *&head, int position) {
-    cout << "Which node to delete? " << endl;
-    output(head);
-    int entry;
-    cout << "Choice --> ";
-    cin >> entry;
+void addTail(Node *&head, float val) {
 
+}
+// deleteNode function to delete node at 1-based position. Returns true if deleted.
+bool deleteNode(Node *&head, int entry) {
     Node *current = head;
     Node *prev = head;
     for (int i = 0; i < (entry-1); i++)
