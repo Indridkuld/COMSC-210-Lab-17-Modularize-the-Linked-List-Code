@@ -28,7 +28,8 @@ int main() {
 
     // adding a node to the tail of the list
     float choice;
-    cout << "Enter a value to add to the tail of the list: ";
+    cout << "Enter a value to add to the tail of the list: "<< endl;
+    cout << "Choice --> ";
     cin >> choice;
     addTail(head, choice);
     output(head);
@@ -42,13 +43,7 @@ int main() {
     output(head);
 
     // insert a node
-    Node *current = head;
     cout << "After which node to insert 10000? " << endl;
-    count = 1;
-    while (current) {
-        cout << "[" << count++ << "] " << current->value << endl;
-        current = current->next;
-    }
     cout << "Choice --> ";
     cin >> entry;
     insertNode(head, entry, 10000);
@@ -99,7 +94,7 @@ void addTail(Node *&head, float val) {
 bool insertNode(Node *&head, int entry, float val) {
     Node *current = head;
     Node *prev = head;
-    for (int i = 0; i < (entry); i++)
+    for (int i = 0; i < (entry-1); i++)
         if (i == 0)
             current = current->next;
         else {
