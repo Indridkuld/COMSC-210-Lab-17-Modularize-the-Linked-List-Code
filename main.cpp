@@ -50,6 +50,7 @@ int main() {
     output(head);
 
     // deleting the linked list
+    cout << "Deleting the entire list...\n";
     deleteList(head);
     output(head);
 
@@ -82,7 +83,7 @@ void addTail(Node *&head, float val) {
     n->value = val;
     n->next = nullptr;
     if (!head) {  // if the list is empty, add to front
-        addFront(head, val);
+        head = n;
         return;
     }
     Node *current = head;
@@ -92,6 +93,11 @@ void addTail(Node *&head, float val) {
 }
 // insertNode function to insert val after the given 1-based position. Returns true on success.
 bool insertNode(Node *&head, int entry, float val) {
+    if (entry < 1) return false; // invalid position
+    if (entry == 1) { // insert at the front
+        addFront(head, val);
+        return true;
+    }
     Node *current = head;
     Node *prev = head;
     for (int i = 0; i < (entry-1); i++)
@@ -120,7 +126,7 @@ bool deleteNode(Node *&head, int entry) {
             prev = prev->next;
         }
     // at this point, delete current and reroute pointers
-    if (current) {  // checks for current to be valid before deleting the node
+    if (current) {  
         prev->next = current->next;
         delete current;
         current = nullptr;
@@ -136,5 +142,4 @@ void deleteList(Node *&head) {
         current = head;
     }
     head = nullptr;
-    output(head);
 }
